@@ -2,7 +2,7 @@
 
 This repository contains a handful of python scripts using the Labstep API.
 
-Full documentation can be found on Intercom [TODO, insert link here], this repository is just the source code backing the documentation. 
+Full documentation can be found on Intercom https://help.labstep.com/api/getting-started-with-the-labstep-api, this repository is just the source code backing the documentation. 
 
 
 ## Requirements
