@@ -2,9 +2,9 @@
 
 This guide will take you step-by-step through the process of setting up a new data-enabled device to send data automatically to Labstep.
 
-## Creating a Labstep Resource for your Device.
+## Creating a Labstep Resource for the Device.
 
-The first step is to create a resource representing your device on Labstep. 
+If the device you want to connect is not already on Labstep (through Discover Resources) you will need to create a new resource to represent it on Labstep. 
 
 This can be done with an API request of the following form:
 
@@ -13,48 +13,52 @@ curl -X POST "https://api.labstep.com/api/generic/resource"
 -H "Content-Type: application/json"
 -H "apikey: YOUR_API_KEY"
 {
-    name: NAME_OF_DEVICE,
-    resource_category_id: 99,
-    metadata: {
+    "name": "NAME_OF_DEVICE",
+    "resource_category_id": "99",
+    "metadata": "{
        ...
-    }
+    }"
 }
 ```
-In the metadata you can include specifics about the device such as the manufacturer and model number. For a full list of the allowed metadata fields for different resource categories see ____.
+In the metadata you can include specifics about the device such as the manufacturer and model number. For a full list of the allowed metadata fields see ____.
 
 The response should contain an `id` field. Make a note of this `id`. You will need it later.
 
-## Creating a Protocol to use with your device.
+## Creating a Protocol to use with the Device.
 
 ### Create a new protocol.
 
+First create an empty protocol with the following request.
+
 ```
-curl -X POST "https://api.labstep.com/api/generic/protocol-collection" 
+curl -X POST "https://api.labstep.com/api/generic/protocol" 
 -H  "Content-Type: application/json"
 -H "apikey: YOUR_API_KEY"
 {
-    name: "MY_NEW_PROTOCOL"
+    "name": "MY_NEW_PROTOCOL"
 }
 ```
 The response should contain an `id` field. Make a note of this `id`. You will need it later.
 
-### Add a protocol_value.
+### Add a data field to the protocol.
 
-When you add a value to your protocol, you have to specify the `type`. Currently the only supported type is `Number`, however in the future we hope to support other data-types.
+Next you need to specify that this protocol involves data collection. This is done with the `protocol_value` entity.  
 
-You also have to give it a `label`. This same label will be used when sending data from your device so that the incoming data can be matched to the correct `experiment_value`. 
+When you add a `protocol_value` to your protocol, you have to give it a `name` to describe what the data is and specify a `type`. Currently the only supported type is `Number`, however in the future we hope to support other data-types.
 
-It has to be unique to the protocol but you can make it something descriptive so you know what the value means.  
+It has to be unique to the protocol but you can make it something descriptive so you know what the data it contains is i.e. 'measured_temperature', 'pH'.
+
+To populate the `protocol_value` with some data from your device, specify the `resource_id` of the device. 
 
 ```
 curl -X POST "https://api.labstep.com/api/generic/protocol-value" 
 -H  "Content-Type: application/json"
 -H "apikey: YOUR_API_KEY"
 {
-    protocol_id: YOUR_PROTOCOL_ID,
-    resource_id: YOUR_RESOURCE_ID,
-    type: "Number",
-    label: "YOUR_LABEL"
+    "protocol_id": "YOUR_PROTOCOL_ID",
+    "resource_id": "YOUR_RESOURCE_ID",
+    "type": "Number",
+    "name": "MY_DATA_FIELD"
 }
 ```
 
@@ -88,9 +92,9 @@ curl -X POST "https://api.labstep.com/api/generic/device-data"
 -H  "Content-Type: application/json"
 -H "device_key: YOUR_DEVICE_KEY"
 {
-   label: YOUR_LABEL,
-   type: "Number"
-   data: "{
+   "label": "YOUR_LABEL",
+   "type": "Number"
+   "data": "{
        value: 23,
        unit: "oC"
    }" 
@@ -131,3 +135,42 @@ curl -X POST "https://api.labstep.com/api/generic/experiment"
     name: 'My First Protocol Run'
 }
 ```
+
+You will see that an `experiment_value` has been created based on the `protocol_value` you created above. Note the `id` of this `experiment_value` as you will need it for the next step.
+
+## Load data from the device. 
+
+Next you need to point your new `experiment_value` to data that has been sent by the device.
+
+### Search for data from your device.
+
+Find all data sent by your device.
+
+```
+curl -X POST "https://api.labstep.com/api/generic/device-data" 
+-H  "Content-Type: application/json"
+-H "apikey: YOUR_API_KEY"
+{
+    inventory_item_id: YOUR_INVENTORY_ITEM_ID,
+}
+```
+Pick the correct one based on `label`, `type` and `created_at`. Make a note of the `id`.
+
+For files use this instead...
+
+
+
+### Update the `experiment_value`.
+
+Finally, point the `experiment_value` to the `device_data`.
+
+```
+curl -X PUT "https://api.labstep.com/api/generic/experiment-value" 
+-H  "Content-Type: application/json"
+-H "apikey: YOUR_API_KEY"
+{
+    device_data_id: DEVICE_DATA_ID
+}
+```
+
+
