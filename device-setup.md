@@ -46,8 +46,6 @@ Next you need to specify that this protocol involves data collection. This is do
 
 When you add a `protocol_value` to your protocol, you have to give it a `name` to describe what the data is and specify a `type`. Currently the only supported type is `Number`, however in the future we hope to support other data-types.
 
-It has to be unique to the protocol but you can make it something descriptive so you know what the data it contains is i.e. 'measured_temperature', 'pH'.
-
 To populate the `protocol_value` with some data from your device, specify the `resource_id` of the device. 
 
 ```
