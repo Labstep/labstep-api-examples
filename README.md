@@ -194,7 +194,7 @@ Open a new file called ‘create-post.py’
         'description': 'Create post with custom description on your timeline',
     }
     print(data)
-    url = 'https://api.labstep.com/api/generic/post'
+    url = 'https://api.labstep.com/api/generic/experiment'
     r = requests.post(
         url,
         json=data,
@@ -255,15 +255,14 @@ We start by uploading your file to Labstep, the file is saved and and the its da
     {"2042":{"id":2042,"created_at":"2018-04-   10T13:47:38+0000","name":"IMG_0001.png","path":"2018\/04\/10\/phpPvfO92.png","size":41427,"mime_type":"image\/png","thumbnail"  :"thumbnails\/file_small\/2018\/04\/10\/phpPvfO92.png","thumbnail_medium":"thumbnails\/file_medium\/2018\/04\/10\/phpPvfO92.pn  g","thumbnail_large":"thumbnails\/file_large\/2018\/04\/10\/phpPvfO92.png"}}
     '''
 
-The file database IDs can then be used to create a new post
+The file database IDs can then be used to create a new experiment
 
     data = {
-        'name': 'My microscopy post',
+        'name': 'My microscopy experiment',
         'description': 'Automatically created with labstep API test (having fun with attachments)',
-        'file_id': response.keys(),
     }
     print(data)
-    url = 'https://api.labstep.com/api/generic/post'
+    url = 'https://api.labstep.com/api/generic/experiment'
     r = requests.post(
         url,
         json=data,
@@ -272,7 +271,7 @@ The file database IDs can then be used to create a new post
     print(r.text)
     print(r.content)
 
-Then, the post with attachments will appear on your timeline in either the web or mobile apps!
+Then, the experiment with attachments will appear on your timeline in either the web or mobile apps!
 
 Available storage space while Labstep has no storage limit per-user at present, we do limit the attachment size to 25 MB on uploading.
 

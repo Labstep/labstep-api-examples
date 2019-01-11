@@ -8,8 +8,11 @@ headers = {
 }
 
 data = {
-    'name': 'Labstep Experiment API example',
-    'description': 'Create an experiment with a custom description on your timeline',
+    'name': 'Labstep Experiment API advanced example',
+    'description': 'A more advanced example, using a specific protocol',
+    'start': "2018-04-10T17:14:11+0100",
+    'end': "2018-04-10T17:14:11+0100",
+    'protocol_id': '2522',
 }
 print(data)
 url = 'https://api.labstep.com/api/generic/experiment'
