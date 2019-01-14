@@ -120,7 +120,7 @@ Create a ‘create-experiment.py’ file
 Running the script will create an Experiment, using the Protocol with id:2522. You can also create an experiment without attaching a protocol. 
 
     $ python create-experiment.py
-    {'name':'My Experiment','protocol_id': '2522'}
+    {'name':'My Experiment','description': 'Testing whether the labstep API works,'protocol_id': '2522'}
     {
        "id": 124,
        "author": {
@@ -166,6 +166,7 @@ You can attach files / images to your experiment by specifying the experiment_id
     {"2042":{"id":2042,"created_at":"2018-04-   10T13:47:38+0000","name":"IMG_0001.png","path":"2018\/04\/10\/phpPvfO92.png","size":41427,"mime_type":"image\/png","thumbnail"  :"thumbnails\/file_small\/2018\/04\/10\/phpPvfO92.png","thumbnail_medium":"thumbnails\/file_medium\/2018\/04\/10\/phpPvfO92.pn  g","thumbnail_large":"thumbnails\/file_large\/2018\/04\/10\/phpPvfO92.png"}}
     '''
 
+While Labstep has no storage limit per-user at present, we do limit the attachment size to 25 MB on uploading.
 
 ### Further details
 
