@@ -2,7 +2,7 @@ import json
 import requests
 
 headers = {
-    'apikey': 'YjQ2NjYyOGE2YTkyMWJlZGZhMzk1ODQ2MWVjMzgzYTEyN2EzNjE0NQ==',
+    'apikey': 'YOUR_API_KEY',
 }
 
 files = {'file': open('IMG_0001.png', 'rb')}
@@ -16,7 +16,7 @@ r = requests.post(
     data=data
 )
 response = json.loads(r.content)
-print(response)
+print(json.dumps(response, indent=4, sort_keys=True))
 
 '''
 response is a long JSON of the shape
