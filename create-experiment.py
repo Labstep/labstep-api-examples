@@ -6,7 +6,7 @@ headers = {
 }
 data = {
     'name':'My Experiment',
-    'description': 'Testing whether the labstep API works,
+    'description': 'Testing whether the labstep API works',
     'protocol_id': '2522',
 
 }
