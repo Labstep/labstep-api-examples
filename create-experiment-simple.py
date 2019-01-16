@@ -2,13 +2,11 @@
 import json
 import requests
 headers = {
-    'apikey': 'YOUR-API-KEY',
+    'apikey': 'YOUR_API_KEY'
 }
 data = {
     'name':'My Experiment',
-    'description': 'Testing whether the labstep API works',
-    'protocol_id': '2522',
-
+    'description': 'Create an experiment with out a protocol',
 }
 print(data)
 

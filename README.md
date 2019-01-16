@@ -25,7 +25,7 @@ Create a file called ‘authenticate.py’
         'password': 'YOUR-PASSWORD',
     }
     print(data)
-    url = 'https://api.labstep.com/public-api/user/login'
+    url = 'https://api-staging.labstep.com/public-api/user/login'
     r = requests.post(
         url,
         json=data,
@@ -57,7 +57,7 @@ Create a new file called ‘create-protocol.py’
         'name': 'Programmatic Protocol',
     }
     print(data)
-    url = 'https://api.labstep.com/api/generic/protocol'
+    url = 'https://api-staging.labstep.com/api/generic/protocol'
     r = requests.post(
         url,
         json=data,
@@ -98,7 +98,7 @@ Create a ‘create-experiment.py’ file
     import json
     import requests
     headers = {
-        'apikey': 'YOUR-API-KEY',
+        'apikey': 'YOUR_API_KEY'
     }
     data = {
         'name':'My Experiment',
@@ -108,7 +108,7 @@ Create a ‘create-experiment.py’ file
     }
     print(data)
 
-    url = 'https://api.labstep.com/api/generic/experiment'
+    url = 'https://api-staging.labstep.com/api/generic/experiment'
     r = requests.post(
         url,
         json=data,
@@ -117,7 +117,7 @@ Create a ‘create-experiment.py’ file
     parsed = json.loads(r.content)
     print(json.dumps(parsed, indent=4, sort_keys=True))
 
-Running the script will create an Experiment, using the Protocol with id:2522. You can also create an experiment without attaching a protocol. 
+Running the script will create an Experiment, using the Protocol with id:2522. You can also create an experiment without attaching a protocol.
 
     $ python create-experiment.py
     {'name':'My Experiment','description': 'Testing whether the labstep API works,'protocol_id': '2522'}
@@ -140,19 +140,19 @@ Learn more To learn how to attach files to your Experiments, see the “Upload I
 
 ### Upload Instrument Data
 
-You can attach files / images to your experiment by specifying the experiment_id when uploading a file. For example, our instruments produces files such as IMG_0001.png which we can upload to experiment with id:124 as follows:
+You can attach files / images to your experiment by specifying the experiment_id when uploading a file. For example, our instruments produces files such as IMG_0001.png which we can upload to experiment with id:123 as follows:
 
     import json
     import requests
 
     headers = {
-        'apikey': 'YOUR-API-KEY',
+        'apikey': 'YOUR_API_KEY'
     }
 
     files = {'file': open('IMG_0001.png', 'rb')}
-    data = {'experiment_id':124}
+    data = {'experiment_id':123}
     print(files)
-    url = 'https://api.labstep.com/api/generic/file/upload'
+    url = 'https://api-staging.labstep.com/api/generic/file/upload'
     r = requests.post(
         url,
         headers=headers,
@@ -170,4 +170,4 @@ While Labstep has no storage limit per-user at present, we do limit the attachme
 
 ### Further details
 
-We use the same API for our web app so anything you can do on the web app you can do via the api! To see how the web app does it, open the developer tools in your browser, go to the network tab and search for network requests sent to `api.labstep.com` 
+We use the same API for our web app so anything you can do on the web app you can do via the api! To see how the web app does it, open the developer tools in your browser, go to the network tab and search for network requests sent to `api.labstep.com`

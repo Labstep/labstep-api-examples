@@ -8,7 +8,7 @@ data = {
     'password': 'YOUR-PASSWORD-HERE',
 }
 print(data)
-url = 'https://api.labstep.com/public-api/user/login'
+url = 'https://api-staging.labstep.com/public-api/user/login'
 r = requests.post(
     url,
     json=data,
