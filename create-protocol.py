@@ -11,7 +11,7 @@ data = {
     'name': 'Programatic Protocol',
 }
 print(data)
-url = 'https://api-staging.labstep.com/api/generic/protocol'
+url = 'https://api.labstep.com/api/generic/protocol'
 r = requests.post(
     url,
     json=data,

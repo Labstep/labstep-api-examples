@@ -25,7 +25,7 @@ Create a file called ‘authenticate.py’
         'password': 'YOUR-PASSWORD',
     }
     print(data)
-    url = 'https://api-staging.labstep.com/public-api/user/login'
+    url = 'https://api.labstep.com/public-api/user/login'
     r = requests.post(
         url,
         json=data,
@@ -57,7 +57,7 @@ Create a new file called ‘create-protocol.py’
         'name': 'Programmatic Protocol',
     }
     print(data)
-    url = 'https://api-staging.labstep.com/api/generic/protocol'
+    url = 'https://api.labstep.com/api/generic/protocol'
     r = requests.post(
         url,
         json=data,
@@ -108,7 +108,7 @@ Create a ‘create-experiment.py’ file
     }
     print(data)
 
-    url = 'https://api-staging.labstep.com/api/generic/experiment'
+    url = 'https://api.labstep.com/api/generic/experiment'
     r = requests.post(
         url,
         json=data,
@@ -152,7 +152,7 @@ You can attach files / images to your experiment by specifying the experiment_id
     files = {'file': open('IMG_0001.png', 'rb')}
     data = {'experiment_id':123}
     print(files)
-    url = 'https://api-staging.labstep.com/api/generic/file/upload'
+    url = 'https://api.labstep.com/api/generic/file/upload'
     r = requests.post(
         url,
         headers=headers,
