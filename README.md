@@ -117,7 +117,7 @@ Create a ‘create-experiment.py’ file
     parsed = json.loads(r.content)
     print(json.dumps(parsed, indent=4, sort_keys=True))
 
-Running the script will create an Experiment, using the Protocol with id:2522. You can also create an experiment without attaching a protocol.
+Running the script will create an Experiment, using the Protocol with id:2522. 
 
     $ python create-experiment.py
     {'name':'My Experiment','description': 'Testing whether the labstep API works,'protocol_id': '2522'}
@@ -140,7 +140,7 @@ Learn more To learn how to attach files to your Experiments, see the “Upload I
 
 ### Upload Instrument Data
 
-You can attach files / images to your experiment by specifying the experiment_id when uploading a file. For example, our instruments produces files such as IMG_0001.png which we can upload to experiment with id:123 as follows:
+You can attach files / images to your experiment by specifying the experiment_workflow_id when uploading a file. For example, our instruments produces files such as IMG_0001.png which we can upload to experiment with id:123 as follows:
 
     import json
     import requests
@@ -150,7 +150,7 @@ You can attach files / images to your experiment by specifying the experiment_id
     }
 
     files = {'file': open('IMG_0001.png', 'rb')}
-    data = {'experiment_id':123}
+    data = {'experiment_workflow_id':123}
     print(files)
     url = 'https://api.labstep.com/api/generic/file/upload'
     r = requests.post(
@@ -166,7 +166,7 @@ You can attach files / images to your experiment by specifying the experiment_id
     {"2042":{"id":2042,"created_at":"2018-04-   10T13:47:38+0000","name":"IMG_0001.png","path":"2018\/04\/10\/phpPvfO92.png","size":41427,"mime_type":"image\/png","thumbnail"  :"thumbnails\/file_small\/2018\/04\/10\/phpPvfO92.png","thumbnail_medium":"thumbnails\/file_medium\/2018\/04\/10\/phpPvfO92.pn  g","thumbnail_large":"thumbnails\/file_large\/2018\/04\/10\/phpPvfO92.png"}}
     '''
 
-While Labstep has no storage limit per-user at present, we do limit the attachment size to 25 MB on uploading.
+While Labstep has no storage limit per-user at present, we do limit the attachment size to 200 MB on uploading.
 
 ### Further details
 
