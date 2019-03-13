@@ -10,7 +10,7 @@ data = {
 }
 print(data)
 
-url = 'https://api.labstep.com/api/generic/experiment'
+url = 'https://api.labstep.com/api/generic/experiment-workflow'
 r = requests.post(
     url,
     json=data,

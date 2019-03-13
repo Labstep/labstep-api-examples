@@ -6,7 +6,7 @@ headers = {
 }
 
 files = {'file': open('IMG_0001.png', 'rb')}
-data = {'experiment_id': 123}
+data = {'experiment_workflow_id': 123}
 print(files)
 url = 'https://api.labstep.com/api/generic/file/upload'
 r = requests.post(
