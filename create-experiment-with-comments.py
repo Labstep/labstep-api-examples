@@ -19,8 +19,24 @@ r = requests.post(
 parsed = json.loads(r.content)
 print(json.dumps(parsed, indent=4, sort_keys=True))
 
+# From the experiment workflow, get the id – mark as finished
+experimentWorkflowId = parsed['id']
+
 # From the experiment workflow, get the thread.id – then use it to create a new comment
 threadId = parsed['thread']['id']
+
+data = {
+    'ended_at': "2019-03-10T13:47:38+0000",
+}
+url = 'https://api.labstep.com/api/generic/experiment-workflow/%d' % experimentWorkflowId
+r = requests.put(
+    url,
+    json=data,
+    headers=headers,
+)
+parsed = json.loads(r.content)
+
+
 data = {
     'body': 'comment body',
     'thread_id': threadId,
