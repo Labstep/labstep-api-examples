@@ -57,7 +57,7 @@ Create a new file called ‘create-protocol.py’
         'name': 'Programmatic Protocol',
     }
     print(data)
-    url = 'https://api.labstep.com/api/generic/protocol'
+    url = 'https://api.labstep.com/api/generic/protocol-collection'
     r = requests.post(
         url,
         json=data,
