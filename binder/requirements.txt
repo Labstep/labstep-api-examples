@@ -1,2 +1,4 @@
 labstep
 pandas
+requests
+python-dotenv
