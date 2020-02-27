@@ -6,7 +6,7 @@ from api import attachDataToNewExperiment
 
 def onNewFile(filepath):
   # App().start()
-  # analyzeData(filepath)
+  analyzeData(filepath)
   attachDataToNewExperiment()
 
 FolderWatcher(users[0]['folder'],onNewFile).run()
