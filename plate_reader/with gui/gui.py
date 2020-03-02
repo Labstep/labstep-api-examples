@@ -21,7 +21,7 @@ class ExperimentSelect:
     def onSelection():
       onSelect(self.experiment)
       root.pack_forget()
-      messagebox.showinfo('Data Uploaded!',f'Data uploaded to https://app.labstep.com/experiment-workflow/{self.experiment.id}')
+      #messagebox.showinfo('Data Uploaded!',f'Data uploaded to https://app.labstep.com/experiment-workflow/{self.experiment.id}')
 
     self.experiment = experiment
     self.frame = Frame(root)
