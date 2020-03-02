@@ -11,6 +11,7 @@ class EventHandler(RegexMatchingEventHandler):
         self.onNewFile = onNewFile
 
     def on_created(self, event):
+        print(f'file detected at{event.src_path}')
         self.onNewFile(event.src_path)
 
       
@@ -22,6 +23,7 @@ class FolderWatcher:
 
     def run(self):
         self.start()
+        print(f'Watching folder {self.__folder_path}')
         try:
             while True:
                 time.sleep(1)
