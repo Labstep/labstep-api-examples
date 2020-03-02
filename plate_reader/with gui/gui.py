@@ -40,3 +40,5 @@ class App:
 
   def start(self):
     self.window.mainloop()
+
+App().start()
