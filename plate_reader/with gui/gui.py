@@ -1,7 +1,7 @@
 from tkinter import Tk, Frame, Label, Button, Entry, CENTER, LEFT, RIGHT, W, E, X
 from tkinter import messagebox
 from PIL import Image, ImageTk
-
+import webbrowser
 class Logo:
   def __init__(self,root):
     load = Image.open("labstep_logo.png")
@@ -15,13 +15,31 @@ class WatchingMessage:
     self.label = Label(root, text='Watching Folders For Data...')
     self.label.pack()
 
-class ExperimentSelect:
-  def __init__(self,root,experiment,onSelect):
+class Confirmation:
+    def __init__(self, root, message, experiment):
+      self.experiment = experiment
+      self.frame = Frame(root)
+      self.frame.pack(fill=X)
+      self.label = Label(self.frame, text=message)
+      self.label.pack()
+      self.button = Button(self.frame, text="Open", command=self.open)
+      self.button.pack()
+      self.button = Button(self.frame, text="Dismiss", command=self.close)
+      self.button.pack()
 
+    def open(self):
+      webbrowser.open(f'https://app.labstep.com/experiment-workflow/{self.experiment.id}/results', new=2)
+      self.frame.pack_forget()
+
+    def close(self):
+      self.frame.pack_forget()
+class ExperimentSelect:
+  def __init__(self,form,experiment,onSelect):
+    root = form.frame
     def onSelection():
       onSelect(self.experiment)
       root.pack_forget()
-      #messagebox.showinfo('Data Uploaded!',f'Data uploaded to https://app.labstep.com/experiment-workflow/{self.experiment.id}')
+      Confirmation(form.root,'Data uploaded!', experiment)
 
     self.experiment = experiment
     self.frame = Frame(root)
@@ -33,12 +51,13 @@ class ExperimentSelect:
 
 class ExperimentSelectForm:
     def __init__(self,root,experiments,onSelect):
+      self.root = root
       self.frame = Frame(root)
       self.frame.pack()
       self.label = Label(self.frame, pady=10, text='File Detected! Please select an experiment to attach data to...')
       self.label.pack()
       for experiment in experiments:
-        ExperimentSelect(self.frame,experiment,onSelect)
+        ExperimentSelect(self,experiment,onSelect)
 
 class GUI:
   def __init__(self):
@@ -49,5 +68,7 @@ class GUI:
     WatchingMessage(self.window)
 
   def experimentSelect(self, experiments, onSelect):
+    self.window.attributes('-topmost', True)
+    self.window.attributes('-topmost', False)
     ExperimentSelectForm(self.window, experiments, onSelect)
     
