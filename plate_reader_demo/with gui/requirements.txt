@@ -1,5 +1,5 @@
 labstep
 pandas
 pillow
-statistics
 matplotlib
+watchdog
